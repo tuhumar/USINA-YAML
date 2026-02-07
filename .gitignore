@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Builds / outputs
+dist/
+out/
+render/
+exports/
+
+# Local assets that you don't want in repo (optional)
+assets/**/*.mp4
+assets/**/*.mov
+assets/**/*.wav
+assets/**/*.mp3
