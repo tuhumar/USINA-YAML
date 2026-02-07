@@ -1,0 +1,465 @@
+usina_schema: "usina.script/v1.0"
+
+meta:
+  id: "usina_yaml_explainer_2min_v1"
+  title: "USINA-YAML in 2 Minutes: The Script Standard We Need"
+  description: "A 2-minute explainer on what USINA-YAML is and why standardizing video-script specs helps the community."
+  language: "en"
+  duration_s: 120
+  target_platforms: ["youtube"]
+  aspect_ratio: "16:9"
+  deliverables:
+    - "final_video_1080p.mp4"
+    - "subtitles_en.srt"
+  ownership:
+    author: "Diego Gonçalves"
+    project: "USINA"
+  tags: ["standardization", "open-source", "creator-tools", "yaml", "automation", "reproducibility"]
+
+format:
+  video:
+    resolution: "1920x1080"
+    fps: 30
+    codec: "h264"
+    profile: "high"
+    pixel_aspect_ratio: "1:1"
+  audio:
+    sample_rate_hz: 48000
+    codec: "aac"
+    bitrate_kbps: 320
+  captions:
+    burn_in: false
+    file: "subtitles_en.srt"
+    style_preset: "clean_centered"
+  safety:
+    safe_margins_percent: 7
+
+style:
+  pacing: "confident, energetic, no dead air"
+  tone: "smart, friendly, lightly nerdy"
+  visual_language:
+    - "clean kinetic typography"
+    - "UI overlays: schema boxes, checkmarks, lint warnings"
+    - "subtle tech grid + blueprint motifs"
+  typography:
+    primary_font: "Inter"
+    secondary_font: "JetBrains Mono"
+  color_notes: "cool tech palette; high contrast for text overlays"
+  transitions:
+    default: "fast cross-dissolve (6 frames)"
+    emphasis: "whoosh + punch-in"
+  broll_notes:
+    - "favor close-ups of code, teamwork, planning boards"
+    - "avoid anything that reads like a specific brand/product ad"
+
+audio:
+  voiceover:
+    language: "en"
+    voice: "neutral_warm_narrator"
+    delivery: "clear, conversational, confident"
+    target_wpm: 150
+    de_esser: true
+    noise_reduction: "light"
+  music:
+    asset_id: "music_ambient_tech"
+    start_s: 0
+    end_s: 120
+    mix:
+      duck_under_vo_db: -18
+      fade_in_s: 1.0
+      fade_out_s: 2.5
+  mix_targets:
+    integrated_lufs: -14
+    true_peak_db: -1.0
+
+variables:
+  brand:
+    product_name: "USINA-YAML"
+    tagline: "One file. One truth. Any tool."
+  key_phrases:
+    - "tool-agnostic"
+    - "single source of truth"
+    - "lintable and reproducible"
+    - "assets + credits included"
+    - "timelines that don’t drift"
+  on_screen_mini_snippet: |
+    usina_schema: usina.script/v1.0
+    meta: { duration_s: 120, language: en }
+    assets: [ ... ]
+    script:  { ... }
+    timeline: [ ... ]
+    qa: { lint: true }
+
+prompts:
+  - id: "prompt_yaml_overlay"
+    purpose: "Generate a clean animated overlay of a USINA-YAML snippet."
+    input_vars: ["on_screen_mini_snippet"]
+    prompt: >
+      Create a minimalist motion-graphics overlay: a YAML snippet in monospaced font,
+      with subtle highlighting that steps through meta -> assets -> script -> timeline -> qa.
+      Background transparent; soft drop-shadow; smooth cursor reveal; no logos.
+  - id: "prompt_lint_animation"
+    purpose: "Show a satisfying 'lint passed' UI moment."
+    prompt: >
+      Create a short UI animation: checklist items tick on (timeline ordered, no overlap, assets resolved),
+      ending with a green 'LINT: PASS' badge. Clean, modern, non-branded.
+
+sources:
+  - id: "src_yaml_spec"
+    title: "YAML 1.2 specification index"
+    url: "https://yaml.org/spec/"
+    why: "Reference for YAML as the underlying serialization language."
+  - id: "src_json_schema"
+    title: "JSON Schema overview"
+    url: "https://json-schema.org/"
+    why: "Analogy: shared vocabularies enable validation, interoperability, tooling."
+  - id: "src_pexels_license"
+    title: "Pexels license (photos & videos)"
+    url: "https://help.pexels.com/hc/en-us/articles/360042295174-What-is-the-license-of-the-photos-and-videos-on-Pexels"
+    why: "Usage rights for selected stock footage."
+  - id: "src_pixabay_license"
+    title: "Pixabay content license (music)"
+    url: "https://pixabay.com/service/license-summary/"
+    why: "Usage rights for background music."
+
+assets:
+  - id: "music_ambient_tech"
+    type: "audio"
+    url: "https://pixabay.com/music/corporate-ambient-technology-corporate-186320/"
+    license: "Pixabay Content License (free to use; check Content ID note on page)"
+    credit: "The_Mountain (Pixabay)"
+    notes: "Trim to 120s; keep low under VO; fade out last 2.5s."
+
+  - id: "vid_network_animation"
+    type: "video"
+    url: "https://www.pexels.com/video/abstract-network-connectivity-animation-29718189/"
+    license: "Pexels License (free to use)"
+    credit: "Chandresh Uike (Pexels)"
+    notes: "Use as opening hook + background for overlays."
+
+  - id: "vid_futuristic_grid"
+    type: "video"
+    url: "https://www.pexels.com/video/futuristic-digital-grid-network-animation-29167807/"
+    license: "Pexels License (free to use)"
+    credit: "Chandresh Uike (Pexels)"
+    notes: "Great for 'interoperability / tooling' moments."
+
+  - id: "vid_scrolling_code"
+    type: "video"
+    url: "https://www.pexels.com/video/scrolling-codes-on-computer-5473795/"
+    license: "Pexels License (free to use)"
+    credit: "cottonbro studio (Pexels)"
+    notes: "Use for 'scripts as code' and validation points."
+
+  - id: "vid_devs_collab"
+    type: "video"
+    url: "https://www.pexels.com/video/people-coding-in-their-computers-6804109/"
+    license: "Pexels License (free to use)"
+    credit: "pressmaster (Pexels)"
+    notes: "Use for 'building tools + community' beats."
+
+  - id: "vid_team_meeting"
+    type: "video"
+    url: "https://www.pexels.com/video/team-having-a-meeting-while-using-laptop-7989420/"
+    license: "Pexels License (free to use)"
+    credit: "Mikhail Nilov (Pexels)"
+    notes: "Use for 'collaboration standard' beats."
+
+  - id: "vid_work_together_laptop"
+    type: "video"
+    url: "https://www.pexels.com/video/people-working-together-while-using-laptop-7792333/"
+    license: "Pexels License (free to use)"
+    credit: "Mikhail Nilov (Pexels)"
+    notes: "Use for 'handoff across roles/tools' beats."
+
+  - id: "img_blueprints_hands"
+    type: "image"
+    url: "https://www.pexels.com/photo/person-people-building-construction-6615095/"
+    license: "Pexels License (free to use)"
+    credit: "Tima Miroshnichenko (Pexels)"
+    notes: "Use as metaphor: 'blueprint for videos' = spec."
+
+script:
+  vo:
+    - id: "vo_scene_01_hook"
+      text: >
+        You’ve seen this horror movie: the script is in one doc, the assets are in five folders,
+        the timeline lives in someone’s head, and the credits… are missing. Then launch day arrives,
+        and everything breaks.
+    - id: "vo_scene_02_definition"
+      text: >
+        USINA-YAML is a simple idea: a single YAML file that describes a short video end-to-end.
+        Tool-agnostic, human-readable, and strict enough to be validated.
+    - id: "vo_scene_03_whats_inside"
+      text: >
+        It contains the metadata, the style rules, the music, the variables, the prompts,
+        every asset with license and credit, the full narration, and a timeline with exact seconds.
+        One file becomes the source of truth.
+    - id: "vo_scene_04_why_standardize"
+      text: >
+        Why does standardization matter? Because it makes work shareable and reproducible.
+        When everyone speaks the same “spec language,” you can swap editors, automate pipelines,
+        and catch mistakes early with lints: missing assets, overlapping scenes, broken IDs.
+    - id: "vo_scene_05_community_value"
+      text: >
+        For a community, this is rocket fuel. Templates become remixable. Tools become compatible.
+        People can build validators, converters, editors, and CI checks—without rewriting everything
+        for each creator’s custom format.
+    - id: "vo_scene_06_not_a_cage"
+      text: >
+        And no—this isn’t a creativity cage. It’s a contract. You still decide the story, the visuals,
+        the jokes, the vibe. USINA-YAML just keeps the machinery honest.
+    - id: "vo_scene_07_how_to_adopt"
+      text: >
+        Start small: adopt the schema header, list your assets with credits, define your timeline,
+        and turn on QA rules. If you can read a recipe, you can read this.
+    - id: "vo_scene_08_close"
+      text: >
+        USINA-YAML: one file, one truth, any tool. Standardize the boring parts—so the community
+        can go wild on the creative ones.
+
+  on_screen:
+    - id: "os_scene_01"
+      lines:
+        - "EVERYONE HAS A DIFFERENT FORMAT"
+        - "…until it breaks."
+    - id: "os_scene_02"
+      lines:
+        - "USINA-YAML"
+        - "A tool-agnostic script spec (YAML 1.2)"
+    - id: "os_scene_03"
+      lines:
+        - "meta • style • audio • assets • script • timeline • qa"
+        - "Single source of truth"
+    - id: "os_scene_04"
+      lines:
+        - "WHY STANDARDIZE?"
+        - "Interoperability • Automation • Reproducibility"
+        - "Lint early. Fix fast."
+    - id: "os_scene_05"
+      lines:
+        - "COMMUNITY BENEFITS"
+        - "Templates • Validators • Editors • CI checks"
+    - id: "os_scene_06"
+      lines:
+        - "NOT A CAGE."
+        - "A contract for clarity."
+    - id: "os_scene_07"
+      lines:
+        - "ADOPT IN 4 STEPS"
+        - "1) schema header  2) assets+credits  3) timeline  4) QA lints"
+    - id: "os_scene_08"
+      lines:
+        - "One file. One truth. Any tool."
+        - "Join the standard."
+
+timeline:
+  - id: "scene_01_hook"
+    start_s: 0
+    end_s: 12
+    vo_ref: "vo_scene_01_hook"
+    shots:
+      - type: "video"
+        asset_id: "vid_network_animation"
+        duration_s: 6
+        in_s: 0
+        out_s: 6
+      - type: "video"
+        asset_id: "vid_scrolling_code"
+        duration_s: 6
+        in_s: 10
+        out_s: 16
+    overlays:
+      - type: "kinetic_text"
+        ref_id: "os_scene_01"
+        style: "big_bold_center"
+        enter_s: 0.4
+        exit_s: 11.2
+
+  - id: "scene_02_definition"
+    start_s: 12
+    end_s: 28
+    vo_ref: "vo_scene_02_definition"
+    shots:
+      - type: "image"
+        asset_id: "img_blueprints_hands"
+        duration_s: 8
+      - type: "motion_graphics"
+        prompt_id: "prompt_yaml_overlay"
+        duration_s: 8
+    overlays:
+      - type: "lower_third"
+        text: "USINA-YAML = a single, validated video script file"
+        enter_s: 12.5
+        exit_s: 27.5
+      - type: "kinetic_text"
+        ref_id: "os_scene_02"
+        style: "title_stack_left"
+        enter_s: 13.0
+        exit_s: 27.2
+
+  - id: "scene_03_whats_inside"
+    start_s: 28
+    end_s: 48
+    vo_ref: "vo_scene_03_whats_inside"
+    shots:
+      - type: "video"
+        asset_id: "vid_futuristic_grid"
+        duration_s: 10
+        in_s: 0
+        out_s: 10
+      - type: "motion_graphics"
+        prompt_id: "prompt_yaml_overlay"
+        duration_s: 10
+    overlays:
+      - type: "kinetic_text"
+        ref_id: "os_scene_03"
+        style: "checklist_pop"
+        enter_s: 29.0
+        exit_s: 47.2
+
+  - id: "scene_04_why_standardize"
+    start_s: 48
+    end_s: 68
+    vo_ref: "vo_scene_04_why_standardize"
+    shots:
+      - type: "video"
+        asset_id: "vid_team_meeting"
+        duration_s: 10
+        in_s: 2
+        out_s: 12
+      - type: "video"
+        asset_id: "vid_scrolling_code"
+        duration_s: 10
+        in_s: 20
+        out_s: 30
+    overlays:
+      - type: "kinetic_text"
+        ref_id: "os_scene_04"
+        style: "big_left_bullets"
+        enter_s: 48.5
+        exit_s: 67.5
+      - type: "motion_graphics"
+        prompt_id: "prompt_lint_animation"
+        duration_s: 4
+        start_offset_s: 62
+
+  - id: "scene_05_community_value"
+    start_s: 68
+    end_s: 88
+    vo_ref: "vo_scene_05_community_value"
+    shots:
+      - type: "video"
+        asset_id: "vid_work_together_laptop"
+        duration_s: 10
+        in_s: 5
+        out_s: 15
+      - type: "video"
+        asset_id: "vid_devs_collab"
+        duration_s: 10
+        in_s: 0
+        out_s: 10
+    overlays:
+      - type: "kinetic_text"
+        ref_id: "os_scene_05"
+        style: "stack_center"
+        enter_s: 69.0
+        exit_s: 87.2
+
+  - id: "scene_06_not_a_cage"
+    start_s: 88
+    end_s: 105
+    vo_ref: "vo_scene_06_not_a_cage"
+    shots:
+      - type: "video"
+        asset_id: "vid_futuristic_grid"
+        duration_s: 8
+        in_s: 12
+        out_s: 20
+      - type: "video"
+        asset_id: "vid_network_animation"
+        duration_s: 9
+        in_s: 8
+        out_s: 17
+    overlays:
+      - type: "kinetic_text"
+        ref_id: "os_scene_06"
+        style: "bold_center_pulse"
+        enter_s: 88.6
+        exit_s: 104.4
+
+  - id: "scene_07_how_to_adopt"
+    start_s: 105
+    end_s: 115
+    vo_ref: "vo_scene_07_how_to_adopt"
+    shots:
+      - type: "video"
+        asset_id: "vid_scrolling_code"
+        duration_s: 5
+        in_s: 30
+        out_s: 35
+      - type: "motion_graphics"
+        prompt_id: "prompt_yaml_overlay"
+        duration_s: 5
+    overlays:
+      - type: "kinetic_text"
+        ref_id: "os_scene_07"
+        style: "steps_right"
+        enter_s: 105.2
+        exit_s: 114.7
+
+  - id: "scene_08_close"
+    start_s: 115
+    end_s: 120
+    vo_ref: "vo_scene_08_close"
+    shots:
+      - type: "motion_graphics"
+        description: "Simple logo-style end card with tagline and subscribe/follow prompt (non-branded)."
+        duration_s: 5
+    overlays:
+      - type: "kinetic_text"
+        ref_id: "os_scene_08"
+        style: "endcard_center"
+        enter_s: 115.1
+        exit_s: 120
+
+export:
+  render:
+    container: "mp4"
+    filename: "final_video_1080p.mp4"
+    video_codec: "h264"
+    audio_codec: "aac"
+    audio_normalization: "integrated_lufs_-14"
+  subtitles:
+    generate_srt: true
+    filename: "subtitles_en.srt"
+  versioning:
+    scheme: "semver"
+    version: "1.0.0"
+    changelog:
+      - "Initial 2-minute explainer spec."
+
+qa:
+  lint:
+    enabled: true
+    rules:
+      - id: "timeline_ordered"
+        description: "Scenes must be ordered by start_s and non-overlapping."
+      - id: "timeline_starts_at_zero"
+        description: "First scene must start at 0."
+      - id: "timeline_ends_at_duration"
+        description: "Last scene end_s must equal meta.duration_s."
+      - id: "asset_ids_exist"
+        description: "Every asset_id referenced in timeline must exist in assets."
+      - id: "vo_refs_exist"
+        description: "Every vo_ref referenced in timeline must exist in script.vo."
+      - id: "shot_durations_fit_scene"
+        description: "Sum of shot durations per scene must match (end_s - start_s) or be explicitly justified."
+      - id: "music_covers_full_timeline"
+        description: "Background music must cover 0..duration_s (trim/fade allowed)."
+  review_checklist:
+    - "All on-screen text stays within safe margins."
+    - "VO is intelligible; music ducking feels natural."
+    - "Credits/licenses present for all external assets."
+    - "No brand logos visible in stock footage."
+    - "Captions match VO and punctuation is clean."
