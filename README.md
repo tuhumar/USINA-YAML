@@ -14,6 +14,8 @@ Most “video scripts” are either:
 
 USINA-YAML sits in the middle: **human readable**, **version controllable**, and **lintable**.
 
+> **Title source:** The canonical video title is read from YAML (`project.title` when present, otherwise `meta.title`). Do not infer titles from filenames or external metadata.
+
 
 1) **Schema validation** (structure/types) using `schema/usina.script.v1.0.schema.json`  
 2) **Lint rules** (math + references), e.g.:
@@ -61,4 +63,3 @@ This makes automated fact-checking and audit trails possible.
 If you want commercial rights, enterprise usage, or monetized productions based on the standard, contact the author listed in `meta.authors` (or provide a public email in `meta.contact`).
 
 ---
-
