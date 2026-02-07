@@ -1,0 +1,54 @@
+USINA Research & Personal Use License (USINA-RPU-1.0)
+=====================================================
+
+Copyright (c) 2026 Diego Meirinho C. P. Gonçalves
+
+This license governs the use of the USINA-YAML specification, schemas, and example documents
+(the “Work”) in this repository.
+
+1) Grant of Rights (Permitted Use)
+---------------------------------
+Subject to the restrictions below, you are granted a worldwide, non-exclusive, royalty-free
+license to:
+- Copy and share the Work for PERSONAL use.
+- Use the Work for NON-COMMERCIAL research and education.
+- Create and share NON-COMMERCIAL adaptations of the Work (e.g., forks, translations, lint rules),
+  provided attribution is preserved.
+
+2) Attribution
+--------------
+You MUST provide attribution in a reasonable manner, including:
+- The name of the author (or a link to this repository), and
+- The license name: “USINA-RPU-1.0”.
+
+3) Prohibited Uses (No Corporate / No Commercial)
+-------------------------------------------------
+You MUST NOT:
+- Use the Work for COMMERCIAL PURPOSES, including any use intended for or directed toward
+  commercial advantage, monetary compensation, revenue generation, or monetized content.
+- Use the Work in whole or in part within any product, service, consulting engagement, or
+  internal business process intended to generate profit or support a for-profit enterprise.
+- Use the Work on behalf of a for-profit entity (company, corporation, partnership, etc.),
+  even for internal evaluation, unless you have a separate written license from the author.
+
+4) Trademarks
+-------------
+This license does not grant permission to use the author’s name, trademarks, or branding in a
+way that implies endorsement.
+
+5) No Warranty
+--------------
+THE WORK IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+6) Termination
+--------------
+If you violate this license, your rights under this license terminate automatically. Rights may
+be reinstated only with explicit written permission from the author.
+
+7) Commercial Licensing
+-----------------------
+Commercial and/or corporate use is available by separate license. Contact the author via the
+repository contact channel (or add an email in meta.contact).
+
+END OF TERMS
