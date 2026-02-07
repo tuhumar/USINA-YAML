@@ -44,19 +44,6 @@ Save this as `examples/air_gen_60s.yml`.
 
 ## Licensing: “free for research/personal use, NOT for corporate/commercial/profit”
 
-What you described is essentially a **NonCommercial** license.
-
-A common, standardized option for specs/docs is:
-- **CC BY-NC 4.0** (Attribution + NonCommercial) citeturn0search1turn0search9turn0search5
-
-**Important nuance:** CC BY-NC restricts *commercial purpose*, not “being a company.” A company doing genuinely noncommercial research may still fit “NonCommercial.” citeturn0search16turn0search5  
-If you want to block **any** corporate/enterprise use regardless of purpose, you’ll need a **custom license** (more restrictive, but less standard/compatible).
-
-### Recommended practical approach (most common)
-- Publish the spec under **CC BY-NC 4.0**  
-- Add a note: “Commercial use requires a separate license from the author.”
-
-CC licenses are generally **not recommended for software code**, but they are **fine for documentation/spec text** (which is what this is). citeturn0search7turn0search3
 
 ---
 
