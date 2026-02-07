@@ -88,7 +88,13 @@ A USINA-YAML document **MUST** contain these top-level keys:
 - `export` (object)
 - `qa` (object)
 
+Optional top-level keys:
+
+- `project` (object)
+
 Implementations **MAY** accept additional keys (extensions), but they **MUST NOT** change the meaning of required keys.
+
+**Video title source:** Implementations **MUST** read the video title exclusively from YAML. Use `project.title` when present; otherwise use `meta.title`. Implementations **MUST NOT** infer the title from filenames or external metadata.
 
 ---
 
@@ -134,6 +140,7 @@ Identity + core timing.
 - `notes` (string)
 
 **Normative constraints:**
+- If `project.title` is present, it is the canonical display title; otherwise `meta.title` is the canonical display title. Implementations **MUST NOT** derive the title from filenames or other external sources.
 - `duration_s` **MUST** match the end time of the last timeline scene (see Lint Rules).
 
 ### 7.3 `format` (object)
