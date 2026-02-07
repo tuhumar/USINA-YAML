@@ -1,7 +1,5 @@
 # USINA-YAML v1.0 — Tool-Agnostic Video Script Standard (YAML 1.2)
 
-**Schema ID:** `usina.script/v1.0`  
-**Status:** v1.0 (stable)  
 **Scope:** Short-form video production scripts (also works for long-form), with explicit **assets**, **sources**, **prompts**, and a deterministic **timeline**.
 
 USINA-YAML is designed as a **single source of truth** for a video episode: creative intent + technical constraints + citations + rights metadata + a time-accurate scene timeline that can drive editors, renderers, and AI-assisted pipelines.
