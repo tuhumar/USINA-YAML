@@ -1,811 +1,697 @@
-# ROADMAP — USINA-YAML
+# ROADMAP — USINA Media Script
 
 **Repository:** `tuhumar/USINA-YAML`  
-**Roadmap status:** strategic / execution-ready  
-**Scope:** evolve USINA-YAML from a strong v1.0 specification into a complete, adoptable, testable, tool-agnostic audiovisual standard and ecosystem.  
+**Canonical schema ID:** `usina.script/v1.0`  
+**Canonical extension:** `.usina.yaml`  
+**Marketing name:** **USINA Media Script**  
+**Roadmap status:** strategic / competitive / execution-ready  
 **Primary horizon:** 12 months  
-**Secondary horizon:** 24 months
+**Secondary horizon:** 24 months  
+**Long horizon:** 36–60 months
 
 ---
 
 ## 1) Executive summary
 
-USINA-YAML already has the right foundation: a normative specification, a baseline JSON Schema, an example, and a changelog. That is enough to prove the concept, but not yet enough to make the standard easy to trust, implement, validate, or adopt at scale.
+USINA already has the hardest starting point: a serious normative core. The next phase is not “more fields”; it is becoming the best **open, lintable, AI-native, renderer-neutral media scripting standard**.
 
-The next stage should not be “add more fields.” It should be **standard hardening + ecosystem creation**.
+USINA Media Script should combine qualities the current market rarely delivers together:
 
-This roadmap therefore focuses on nine parallel objectives:
+1. readable declarative authoring
+2. strict conformance and semantic lint
+3. portable interchange across tools
+4. prompt, source, rights, and provenance auditability
+5. deterministic automation at scale
 
-1. **Canonicalization** — remove ambiguity between README, spec, schema, and examples.
-2. **Conformance** — define what “valid” and “portable” really mean in machine-checkable terms.
-3. **Tooling** — deliver a reference CLI, lint engine, and diagnostics.
-4. **SDKs** — make the standard easy to consume in Python and TypeScript first.
-5. **Authoring UX** — examples, templates, snippets, schema mapping, editor support.
-6. **Interoperability** — adapters for FFmpeg pipelines, NLE-adjacent tooling, and AI media stacks.
-7. **Governance** — RFC process, compatibility policy, release process, and extension rules.
-8. **Trust & provenance** — stronger citation, rights, integrity, and auditability workflows.
-9. **Adoption** — docs, profiles, showcases, and implementation guides that make the standard usable outside the repo.
-
-The strategic intent is clear:
-
-> **USINA-YAML should become the Markdown + OpenAPI + package-lock mindset for video production pipelines**: human-readable, machine-validated, portable, auditable, extensible, and implementation-friendly.
+That combination is the opportunity.
 
 ---
 
-## 2) Current state assessment
+## 2) Canonical naming decisions
 
-### What already exists
-- A v1.0 normative specification centered on `usina.script/v1.0`.
-- A baseline JSON Schema validator.
-- At least one conformant example workflow.
-- A changelog with the initial release.
-- A repository layout that already hints at “spec + schema + examples” as the canonical structure.
+These decisions should now be treated as canonical.
 
-### What is still missing or immature
-- Canonical documentation alignment across all repo entry points.
-- A real linter implementation for timeline math and cross-reference resolution.
-- A formal conformance test suite with valid/invalid fixtures.
-- A reference CLI.
-- Published SDKs/parsers.
-- CI pipelines enforcing schema/lint correctness.
-- Editor tooling and authoring ergonomics.
-- Governance, extension registry, and RFC flow.
-- Version migration policy.
-- Interop adapters and reference render plans.
-- Rich example corpus across multiple real production scenarios.
+### Standard identity
+- **Repository brand:** `USINA-YAML`
+- **Specification / product-facing brand:** **USINA Media Script**
+- **Canonical schema ID:** `usina.script/v1.0`
+- **Canonical document extension:** `.usina.yaml`
 
-### Strategic diagnosis
-USINA-YAML is currently **spec-first**.  
-To become a real standard, it must become **spec + tooling + fixtures + governance + adoption**.
+### Example filenames
+- `episode_001.usina.yaml`
+- `cobra_veneno_short.usina.yaml`
+- `air_gen_explainer.usina.yaml`
 
----
+### Why this naming is strategically strong
+- Keeps YAML compatibility explicit
+- Gives the format a recognizable identity beyond plain `.yaml`
+- Avoids ambiguous proprietary-looking extensions
+- Leaves room for a future artifact family
 
-## 3) Product thesis
-
-USINA-YAML should solve five painful classes of problems simultaneously:
-
-### 3.1 Human-machine gap
-Creative documents are readable but not automatable. NLE projects are automatable but opaque. USINA-YAML should remain in the middle ground.
-
-### 3.2 Multi-tool fragmentation
-A project may pass through LLMs, FFmpeg, motion graphics, NLEs, subtitle tools, TTS engines, search agents, and publishing pipelines. USINA-YAML should describe the production truth without binding itself to one renderer.
-
-### 3.3 Trust and provenance
-Modern AI-assisted media pipelines need source tracking, prompt tracking, and rights tracking. USINA-YAML should treat these as first-class objects, not afterthoughts.
-
-### 3.4 Variation at scale
-Shorts, dubs, aspect-ratio variants, thumbnails, captions, metadata packages, and A/B hooks should all be expressible without duplicating logic everywhere.
-
-### 3.5 Long-term portability
-The format should outlive any single app, plugin, or model provider.
+### Future artifact family
+- `.usina.yaml` — canonical authoring format
+- `.usina.lock` — reproducibility / integrity lockfile
+- `.usina.bundle` — portable packaged project bundle
+- `.usina.report.json` — machine-readable validation / audit report
 
 ---
 
-## 4) Guiding principles
+## 3) Market opportunity
 
-1. **Canonical truth beats convenience.**  
-   There must be one authoritative interpretation for every required field.
+The market is fragmented across three families:
 
-2. **Strict core, flexible edges.**  
-   The core format should be small, stable, and strongly validated. Extensions should be explicit and namespaced.
+1. **interchange-first timeline formats**
+2. **render/edit API schemas**
+3. **code-first video frameworks**
 
-3. **Schema is not enough.**  
-   USINA-YAML must always distinguish between structural validation and semantic linting.
-
-4. **Everything referenced must exist.**  
-   IDs, assets, prompts, sources, VO blocks, and generators should be resolvable.
-
-5. **Rights metadata is non-optional.**  
-   Audio, visuals, fonts, and derived assets must stay traceable.
-
-6. **AI usage must be auditable.**  
-   Prompt lineage and cited factual blocks should remain inspectable.
-
-7. **Portable by default.**  
-   The spec should resist renderer lock-in.
-
-8. **Versioning must be explicit.**  
-   Breaking changes require a new schema line.
-
-9. **Examples are part of the standard.**  
-   Good examples reduce ambiguity more effectively than prose alone.
-
-10. **Tooling should teach the standard.**  
-    The CLI, diagnostics, docs, and editor integration should explain errors in human language.
+USINA can win by sitting above them as a portable truth layer for:
+- creative intent
+- timing
+- prompts
+- sources
+- rights
+- exports
+- QA
+- automation metadata
 
 ---
 
-## 5) Strategic workstreams
+## 4) Competitive landscape
 
-This roadmap is split into ten major workstreams.
+## 4.1 OpenTimelineIO (OTIO)
+### What OTIO does well
+- open-source timeline abstraction
+- adapters/plugins
+- packaging and portability mindset
+- serious interoperability discipline
 
-### W1 — Canonical Standard Core
-Goal: make the spec, schema, README, examples, and terminology fully coherent.
+### What OTIO does not provide strongly
+- AI-first authoring semantics
+- first-class prompts
+- first-class citations and factual provenance
+- first-class rights metadata and compliance semantics
+- creator-facing semantic lint for publishable media manifests
 
-### W2 — Validation & Conformance
-Goal: turn the current “spec says it” model into a machine-tested conformance surface.
+### What USINA should learn from OTIO
+- adapter architecture
+- explicit lossless vs lossy interop documentation
+- bundle/portability discipline
 
-### W3 — Tooling & Reference CLI
-Goal: make the format practical to author, validate, lint, inspect, and evolve.
-
-### W4 — SDKs & Data Models
-Goal: offer stable parsing and manipulation libraries in the languages most likely to drive pipelines.
-
-### W5 — Authoring Experience
-Goal: make writing USINA-YAML pleasant in editors, automations, and AI workflows.
-
-### W6 — Interoperability & Render Adapters
-Goal: bridge from the abstract format into usable production pipelines.
-
-### W7 — Examples, Fixtures, and Profiles
-Goal: represent real-world scenarios, not only a single demo file.
-
-### W8 — Governance & Release Management
-Goal: prevent the standard from becoming ad hoc or silently divergent.
-
-### W9 — Provenance, Rights, and Compliance
-Goal: make the format safe for research, creator workflows, and future enterprise use.
-
-### W10 — Ecosystem & Adoption
-Goal: help external users understand when and why to adopt USINA-YAML.
+### How USINA can move ahead
+- add `prompts`, `sources`, `qa`, rights, and audit semantics as first-class objects
+- create OTIO bridges so USINA becomes the richer upstream truth layer
+- make conformance creator-friendly, not just integration-friendly
 
 ---
 
-## 6) Phased roadmap
+## 4.2 FCPXML and legacy XML interchange workflows
+### What they do well
+- real editorial ecosystem presence
+- practical NLE handoff value
+- familiarity in post-production
 
-## Phase 0 — Canonicalization and repo hardening
-**Target window:** Weeks 1–2  
+### What they do not provide strongly
+- AI-native authoring model
+- modern open governance
+- rich source / rights / prompt / compliance semantics
+- pleasant developer ergonomics for automation pipelines
+
+### What USINA should learn
+- respect editorial reality
+- build real import/export bridges
+- preserve translation logs for unsupported mappings
+
+### How USINA can move ahead
+- be easier to read, validate, diff, and automate
+- preserve more meaning about why media exists, not only where it sits
+- carry provenance and QA context that XML handoff formats usually drop
+
+---
+
+## 4.3 Remotion
+### What it does well
+- excellent developer experience
+- highly expressive composition model
+- strong dynamic generation story
+- strong preview/render appeal for app ecosystems
+
+### What it does not provide strongly
+- neutral interchange semantics
+- portable declarative truth layer across non-React systems
+- standard-first conformance and public governance
+- built-in provenance / rights / citations model
+
+### What USINA should learn
+- preview matters
+- developer experience matters
+- parametric media generation is core to the future
+
+### How USINA can move ahead
+- position USINA as the portable contract and Remotion as one backend
+- add `x_remotion` conventions without tying core semantics to React
+- separate portable authoring intent from renderer-specific implementation
+
+---
+
+## 4.4 Shotstack
+### What it does well
+- practical render API
+- operationally useful timeline model
+- scalable cloud rendering
+- template/automation orientation
+
+### What it does not provide strongly
+- open governance as a standard
+- renderer neutrality
+- deep provenance / citation / rights semantics
+- long-term archival/interchange framing
+
+### What USINA should learn
+- practical usefulness wins adoption
+- templates and render plans matter
+- cloud-targeted adapters are valuable
+
+### How USINA can move ahead
+- stay vendor-neutral
+- export into service APIs instead of being defined by one
+- keep conformance, openness, and portability as differentiators
+
+---
+
+## 4.5 JSON2Video
+### What it does well
+- simple automation entry point
+- good fit for low-friction, faceless automation use cases
+- practical content-at-scale orientation
+
+### What it does not provide strongly
+- deep conformance story
+- rich provenance model
+- public standard identity
+- archival/interchange-grade semantics
+
+### What USINA should learn
+- low-friction onboarding is a feature
+- starter templates matter
+- simple happy-path profiles matter
+
+### How USINA can move ahead
+- offer beginner-friendly profiles without sacrificing rigor
+- become the open format that simple APIs can ingest or emit
+
+---
+
+## 4.6 MLT / engine-oriented open ecosystems
+### What they do well
+- actual execution grounding
+- real open-source production infrastructure
+- timeline/render practicality
+
+### What they do not provide strongly
+- broad positioning as a general AI-era media script standard
+- rich prompt/source/rights/QA semantics
+- neutral upstream contract for multi-tool automation
+
+### What USINA should learn
+- eventually, real execution matters
+- abstract specs become stronger when backed by runnable adapters
+
+### How USINA can move ahead
+- act as the neutral upstream contract while bridging to execution engines
+
+---
+
+## 5) The category USINA should own
+
+USINA should explicitly aim to own this category:
+
+> **Open, lintable, AI-native, rights-aware, source-aware, renderer-neutral media scripting**
+
+That is stronger than “timeline format”, stronger than “render API schema”, and more portable than “code-first framework”.
+
+---
+
+## 6) Strategic differentiation
+
+USINA should not try to win by merely adding more fields. It should win by deliberately combining strengths competitors rarely combine:
+
+1. **first-class prompts**
+2. **first-class citations and sources**
+3. **first-class rights metadata**
+4. **first-class QA gates**
+5. **profiles for real workflows**
+6. **conformance fixtures + badges**
+7. **render-plan neutrality**
+8. **human + agent co-authoring**
+
+---
+
+## 7) Product thesis
+
+USINA Media Script should become the single source of truth for:
+- creative intent
+- timing
+- assets
+- prompts
+- citations
+- rights
+- export targets
+- QA gates
+- automation metadata
+
+This makes it useful for:
+- creators
+- editors
+- automation builders
+- AI video pipelines
+- research media teams
+- agencies
+- future enterprise compliance workflows
+
+---
+
+## 8) Guiding principles
+
+1. canonical truth beats convenience
+2. strict core, flexible edges
+3. schema is not enough; semantic lint matters
+4. everything referenced must exist
+5. rights metadata is non-optional
+6. AI usage must be auditable
+7. portable by default
+8. versioning must be explicit
+9. examples are part of the standard
+10. tooling should teach the standard
+11. profiles should reduce fragmentation
+12. future identity should remain anchored in `.usina.yaml`
+
+---
+
+## 9) Strategic workstreams
+
+### W1 — Canonical standard core
+Make spec, schema, README, examples, glossary, and terminology fully coherent.
+
+### W2 — Conformance and lint
+Turn v1.0 into a machine-testable contract.
+
+### W3 — Reference CLI
+Ship the official validation/linting/inspection toolkit.
+
+### W4 — SDKs and typed models
+Python and TypeScript first; Rust and Go later.
+
+### W5 — Authoring UX
+Editor support, snippets, profile starters, AI-safe authoring guidance.
+
+### W6 — Interoperability
+Render plans, adapters, import/export bridges.
+
+### W7 — Profiles and examples
+Cover real workflows, not just toy demos.
+
+### W8 — Governance
+RFCs, compatibility policy, release discipline, extension registry.
+
+### W9 — Provenance and rights
+Checksums, manifests, lineage, claim coverage, compliance overlays.
+
+### W10 — Ecosystem and adoption
+Docs site, badges, comparison pages, showcases, partner adapters.
+
+### W11 — Competitive moat
+Build the things competitors do not combine:
+- prompt lineage
+- rights metadata
+- citations / fact coverage
+- profile ecosystem
+- conformance + badges
+- render-plan neutrality
+
+### W12 — Future systems
+Prepare for:
+- semantic diff/merge
+- collaborative editing
+- registry ecosystem
+- policy packs
+- agentic production loops
+- reproducible media builds
+- provenance graph bridges
+
+---
+
+## 10) Phased roadmap
+
+## Phase 0 — Naming, canonicalization, and repo hardening
+**Window:** Weeks 1–2  
 **Priority:** P0
 
-### Objectives
-- Establish a clean canonical entrypoint.
-- Remove ambiguity between the README and the normative spec.
-- Define the repo as a standards repository, not just a document dump.
-
 ### Deliverables
-- `ROADMAP.md` added and accepted as the execution plan.
-- README rewritten to match the actual v1.0 schema and terminology.
-- `CONTRIBUTING.md` added.
-- `GOVERNANCE.md` added with maintainer, proposal, and decision flow.
-- `RFC/` directory scaffold created.
-- GitHub issue templates for:
-  - bug in spec
-  - schema mismatch
-  - linter rule proposal
-  - extension proposal
-  - interop adapter proposal
-- PR template added.
-- Label taxonomy defined:
-  - `spec`
-  - `schema`
-  - `lint`
-  - `docs`
-  - `example`
-  - `interop`
-  - `governance`
-  - `breaking-change`
-  - `good-first-issue`
-- Standard glossary added to docs.
-- Terminology normalized:
-  - `usina_schema`
-  - `meta`
-  - `assets[].uri`
-  - `script`
-  - `timeline`
-  - `qa`
-  - `export`
+- officially adopt:
+  - `usina.script/v1.0`
+  - `.usina.yaml`
+  - “USINA Media Script”
+- rewrite README around canonical naming and current v1.0 structure
+- add `CONTRIBUTING.md`
+- add `GOVERNANCE.md`
+- add `RFC/`
+- add docs index and glossary
+- remove stale syntax from entry docs
 
 ### Definition of done
-- A new reader can enter via README and never encounter conflicting field names or old syntax.
-- The canonical file layout is documented and stable.
-- Every standards change has an obvious contribution path.
+A new reader understands the name, file identity, and canonical structure in one pass.
 
 ---
 
 ## Phase 1 — Conformance foundation
-**Target window:** Weeks 2–6  
+**Window:** Weeks 2–6  
 **Priority:** P0
 
-### Objectives
-- Convert the v1.0 spec into a tested conformance baseline.
-- Separate schema failures from lint failures and reference failures.
-
 ### Deliverables
-- Reference linter spec document:
-  - rule IDs
-  - severity levels
-  - diagnostic messages
-  - fix hints
-- `tests/fixtures/valid/` corpus
-- `tests/fixtures/invalid/` corpus
-- `tests/fixtures/edge_cases/` corpus
-- Machine-readable expected results for each fixture.
-- Conformance matrix that maps:
-  - spec section
-  - schema coverage
-  - lint coverage
-  - fixture coverage
-- CI workflow:
-  - YAML parse checks
-  - JSON Schema validation
-  - lint pass
-  - docs link checks
-- Baseline linter rules implemented:
-  - timeline ordering
-  - no overlap
-  - first scene starts at 0
-  - last scene ends at `meta.duration_s`
-  - shot duration sum tolerance
-  - valid asset references
-  - valid prompt references
-  - valid citation references
-  - valid VO references
-  - `audio.bed` and `audio_tracks` audio-type enforcement
-- Error code namespace such as:
-  - `USINA-SCHEMA-001`
-  - `USINA-LINT-014`
-  - `USINA-REF-006`
+- rule registry with stable error codes
+- valid / invalid / edge-case fixtures
+- conformance matrix
+- CI validation workflow
+- diagnostics with human-readable fixes
+- JSON output for machine use
+- baseline rule set for timeline integrity, references, audio typing, and rights presence
 
 ### Definition of done
-- The repo can prove which documents are conformant and why non-conformant ones fail.
-- Every normative lint rule from v1.0 has at least one passing and one failing fixture.
+Conformance becomes objective, testable, and automatable.
 
 ---
 
 ## Phase 2 — Reference CLI
-**Target window:** Month 2  
+**Window:** Month 2  
 **Priority:** P0
 
-### Objectives
-- Ship a reference developer tool that makes the standard operational.
+### Commands
+- `usina validate`
+- `usina lint`
+- `usina explain`
+- `usina doctor`
+- `usina fmt`
+- `usina refs`
+- `usina stats`
+- `usina bundle`
+- `usina migrate`
 
-### Proposed CLI name
-- `usina`
-- or `usina-cli`
-
-### Minimum command set
-- `usina validate file.yml`
-- `usina lint file.yml`
-- `usina explain file.yml`
-- `usina init profile`
-- `usina doctor file.yml`
-- `usina fmt file.yml`
-- `usina refs file.yml`
-- `usina stats file.yml`
-- `usina bundle file.yml`
-- `usina migrate file.yml --to usina.script/v1.1`
-
-### Core capabilities
-- YAML parsing with stable error messages.
-- Schema validation against known schema IDs.
-- Lint execution with severity filtering.
-- Resolved reference graph output.
-- Human-readable summary mode.
-- JSON output mode for CI and automation.
-- Exit codes suitable for pipelines.
-- `--strict` mode.
-- `--tolerance-s` override.
-- Support for remote schemas and local vendored schemas.
-
-### Nice-to-have capabilities
-- auto-fix for simple canonicalization cases
+### Nice-to-have features
 - timeline visualization in text
 - asset/license report
-- source/citation coverage report
+- citation coverage report
 - duplicate/unused asset detection
 - shadowed variable detection
+- simple autofix for canonicalization cases
 
 ### Definition of done
-- A user can author or audit a file without writing custom validation code.
-- CI can rely on the reference CLI as the enforcement tool.
+USINA becomes usable without custom glue code.
 
 ---
 
-## Phase 3 — SDKs and typed models
-**Target window:** Months 2–4  
+## Phase 3 — Profiles and starter kits
+**Window:** Months 2–4  
 **Priority:** P1
 
-### Objectives
-- Make the format easy to integrate into Python-first and TypeScript-first pipelines.
-
-### Deliverables
-#### Python package
-- `usina_yaml` or similar
-- parse
-- validate
-- lint
-- typed dataclasses / Pydantic models
-- reference graph utilities
-- fixture-driven tests
-
-#### TypeScript package
-- `@usina/core`
-- typed interfaces
-- schema validation wrappers
-- lint bindings
-- reference resolution helpers
-- AST-like utilities for transformations
-
-#### Shared model goals
-- preserve comments where possible
-- stable round-trip serialization policy
-- deterministic key ordering in formatter mode
-- extension preservation (`x_*`)
-- version-aware parsing
-
-### Future SDK candidates
-- Rust
-- Go
-- Java/Kotlin for enterprise integrations
-
-### Definition of done
-- External tooling no longer needs to scrape YAML ad hoc.
-- Integrators can use stable libraries instead of reimplementing the format.
-
----
-
-## Phase 4 — Authoring UX and editor support
-**Target window:** Months 3–5  
-**Priority:** P1
-
-### Objectives
-- Make authoring fast, safe, and pleasant.
-
-### Deliverables
-- VS Code extension:
-  - schema association
-  - completion
-  - hover docs
-  - snippets
-  - lint diagnostics
-- `yaml-language-server` mapping docs
-- snippet packs:
-  - short explainer
-  - science short
-  - interview clip
-  - slideshow
-  - faceless short
-  - multilingual variant
-- style guide for:
-  - IDs
-  - naming
-  - asset hygiene
-  - source quality
-  - citation placement
-  - prompt recording
-- cookbook pages:
-  - adding background music
-  - scene VO mapping
-  - generated image shot
-  - source-backed claims
-  - localized script variants
-  - thumbnail metadata generation
-- AI authoring guide:
-  - how LLMs should generate conformant files
-  - safe prompt patterns
-  - anti-hallucination guidance
-  - reference completeness checklist
-
-### Definition of done
-- New users can generate a conformant file in under 10 minutes.
-- The editor experience reduces structural errors before CI even runs.
-
----
-
-## Phase 5 — Examples, profiles, and fixture expansion
-**Target window:** Months 3–6  
-**Priority:** P1
-
-### Objectives
-- Show breadth, not just one sample.
-
-### Example families
-- 15s curiosity short
-- 30s educational short
-- 60s narrated explainer
-- long-form chaptered video
-- podcast clip with captions
-- image-only infographic short
-- B-roll heavy documentary excerpt
-- multilingual localization variant
-- audio-first workflow
-- no-source creative fiction workflow
-- source-heavy scientific explainer
-- ad-safe product promo profile
-- faceless channel automation profile
-
-### Profiles to define
-A **profile** is a constrained implementation flavor of the core standard.
-
-Initial proposed profiles:
+### Initial profiles
 - `creator.shortform.v1`
 - `research.explainer.v1`
 - `faceless.automation.v1`
 - `studio.reviewable.v1`
 - `archive.portable.v1`
 
-Each profile should define:
-- required sections
-- stricter lint rules
-- recommended deliverables
-- citation expectations
-- rights expectations
-- extension whitelist
+### Deliverables
+- profile docs
+- starter templates
+- stricter profile lint layers
+- extension whitelist guidance
 
 ### Definition of done
-- Users can start from examples that resemble their actual workflow.
-- Profiles demonstrate how the core standard can remain stable while use cases specialize.
+Users start from realistic templates, not blank files.
 
 ---
 
-## Phase 6 — Interoperability and adapters
-**Target window:** Months 4–8  
+## Phase 4 — SDKs and typed models
+**Window:** Months 2–5  
 **Priority:** P1
 
-### Objectives
-- Prove that USINA-YAML is not just descriptive; it is operationally useful.
-
-### Adapter priorities
-#### A. FFmpeg render-plan adapter
-- derive render commands
-- map timeline shots to concat/filter graphs
-- resolve audio bed and SFX placements
-- output render plan JSON before execution
-
-#### B. TTS / subtitle adapter
-- map VO blocks to TTS jobs
-- emit SRT/VTT sidecars
-- align subtitles with scene windows
-
-#### C. Asset fetch / bundle adapter
-- create portable project bundles
-- copy or manifest referenced local/remote assets
-- generate checksums and rights manifest
-
-#### D. AI media adapter
-- convert prompts + variables + sources into job plans for image/video/text generation systems
-
-#### E. NLE-adjacent export/import experiments
-- OpenTimelineIO mapping where applicable
-- EDL/XML compatibility analysis
-- import/export boundary docs for Premiere/Resolve/OpenShot-like tooling
-
-### Key principle
-Interop should first produce **render plans**, not magic opaque binaries.  
-That keeps the standard auditable and debuggable.
+### Deliverables
+- Python package
+- TypeScript package
+- version-aware parsing
+- stable round-trip policy
+- extension preservation
+- transformation helpers
 
 ### Definition of done
-- At least one adapter can take a conformant file and produce a deterministic execution plan.
-- The repo documents which parts of interop are lossless, lossy, or unsupported.
+Third-party tools stop reimplementing the format ad hoc.
 
 ---
 
-## Phase 7 — v1.1 feature line
-**Target window:** Months 6–9  
-**Priority:** P2 unless blocked by real adoption feedback
-
-### Objective
-Only after v1.0 is well hardened should new core features be standardized.
-
-### Candidate v1.1 areas
-- reusable scene fragments / includes
-- localization packs
-- variant matrices
-- richer overlay model
-- normalized transition object
-- normalized thumbnail specification
-- explicit safe-area metadata
-- shot-level source mapping
-- asset groups / collections
-- timeline markers / beats
-- multi-deliverable inheritance
-- deterministic variable interpolation rules
-- richer prompt lineage fields
-- content warnings / safety metadata
-- renderer hints namespace conventions
-
-### Constraints
-- No breaking changes without new schema ID.
-- New features must ship with:
-  - schema updates
-  - lint updates
-  - example coverage
-  - migration guidance
-  - interop impact notes
-
-### Definition of done
-- v1.1 is based on evidence from tooling and examples, not speculation.
-- Every new field has a concrete implementation story.
-
----
-
-## Phase 8 — Governance, RFCs, and compatibility policy
-**Target window:** Months 2–9, ongoing  
+## Phase 5 — Competitive interop bridges
+**Window:** Months 4–8  
 **Priority:** P1
 
-### Objectives
-- Keep the standard coherent as contributions grow.
+### Must-build bridges
+- OTIO import/export bridge
+- Shotstack export adapter
+- JSON2Video export adapter
+- Remotion project/export bridge
+- FFmpeg render-plan generator
+- TTS/subtitle plan generator
+- asset bundler and manifest generator
 
-### Deliverables
-- `RFC/README.md`
-- RFC template:
-  - problem
-  - proposal
-  - alternatives
-  - compatibility impact
-  - schema impact
-  - lint impact
-  - examples required
-  - migration story
-- Compatibility policy:
-  - patch/minor/major expectations
-  - schema ID rules
-  - deprecation window
-  - extension namespace expectations
-- Maintainer decision model:
-  - accepted
-  - accepted with revision
-  - postponed
-  - rejected
-- Release checklist:
-  - spec synced
-  - schema synced
-  - fixtures updated
-  - examples updated
-  - changelog updated
+### Principle
+Interop should first produce **render plans**, not magic opaque binaries.
 
 ### Definition of done
-- No substantive standard change can land without a traceable decision and migration story.
+USINA can sit in the middle of real production ecosystems.
 
 ---
 
-## Phase 9 — Provenance, integrity, rights, and compliance
-**Target window:** Months 5–10  
-**Priority:** P1/P2 depending on adoption
-
-### Objectives
-- Strengthen the format for serious usage.
+## Phase 6 — Provenance, rights, and trust layer
+**Window:** Months 5–10  
+**Priority:** P1
 
 ### Deliverables
-- asset checksum strategy
-- source integrity guidance
-- rights completeness report format
-- optional lockfile / manifest concept
-- recommended `bundle.json` or `manifest.json`
-- derivative-asset lineage model
-- prompt provenance expansion:
-  - model
-  - provider
-  - generation timestamp
-  - safety mode
-  - seed if applicable
-- legal/compliance profile examples
-- citation coverage metrics
-- risk flags for unsupported rights metadata
-
-### Future direction
-- signed manifests
-- reproducible bundles
-- provenance graph export
-- enterprise policy overlays
+- checksums
+- lockfile concept
+- bundle manifest
+- rights completeness reports
+- prompt lineage metadata
+- derivative asset lineage
+- citation coverage reports
+- unsupported-rights warnings
 
 ### Definition of done
-- A generated production can be audited for claims, rights, and asset lineage with reasonable confidence.
+USINA becomes suitable for serious automated media workflows.
 
 ---
 
-## Phase 10 — Ecosystem, adoption, and public positioning
-**Target window:** Months 6–12  
+## Phase 7 — Authoring UX and AI-native workflows
+**Window:** Months 5–10  
+**Priority:** P1
+
+### Deliverables
+- VS Code extension
+- YAML language server mapping
+- snippets
+- AI authoring guide
+- prompt-safe generation templates
+- lint explanations in plain language
+
+### Definition of done
+Humans and agents can co-author `.usina.yaml` reliably.
+
+---
+
+## Phase 8 — v1.1 proposal line
+**Window:** Months 6–9  
 **Priority:** P2
 
-### Objectives
-- Make the standard discoverable and legible to external builders.
-
-### Deliverables
-- public docs site
-- “Why USINA-YAML” page
-- “When not to use USINA-YAML” page
-- adoption guide for:
-  - solo creators
-  - AI automation builders
-  - research media teams
-  - agencies / studios
-- implementation badges:
-  - schema-compatible
-  - lint-compatible
-  - profile-compatible
-- showcase gallery of real projects
-- comparison docs:
-  - USINA-YAML vs ad hoc JSON
-  - USINA-YAML vs NLE-native project files
-  - USINA-YAML vs timeline interchange formats
+### Candidate additions
+- includes / reusable blocks
+- localization packs
+- variants
+- richer overlays
+- normalized transitions
+- thumbnail spec
+- safe-area metadata
+- asset groups
+- markers/beats
+- multi-deliverable inheritance
+- deterministic variable interpolation
+- richer prompt lineage
+- content warnings / safety fields
+- renderer hint conventions
 
 ### Definition of done
-- A new adopter can understand the value proposition in one visit.
-- Third parties can claim compatibility with a clear meaning.
+New core features are evidence-based, not speculative.
 
 ---
 
-## 7) Proposed milestone map
+## Phase 9 — Public positioning and adoption
+**Window:** Months 6–12  
+**Priority:** P2
 
-### Milestone M1 — Canonical v1.0 repository
-**Outcome:** repo is coherent, navigable, and contributor-ready.
+### Deliverables
+- docs site
+- “Why USINA Media Script”
+- competitive comparison pages
+- compatibility badges
+- showcase gallery
+- implementation guides
+- partner adapter docs
 
-Includes:
-- roadmap
-- canonical README
-- contributing + governance
-- issue/PR templates
-- docs index
+### Definition of done
+External builders understand the category and the advantage clearly.
 
-### Milestone M2 — Conformance kit
-**Outcome:** every normative rule has machine-test coverage.
+---
 
-Includes:
-- fixture suite
-- lint rule registry
-- CI enforcement
-- conformance matrix
+## 11) Future-forward roadmap (2–5 year horizon)
 
-### Milestone M3 — Reference CLI alpha
-**Outcome:** users can validate, lint, and inspect a file from the command line.
+## 11.1 Semantic diff and merge
+Future tooling should understand scenes, prompts, references, and timing semantically rather than only showing line diffs.
 
-Includes:
-- `validate`
-- `lint`
-- `doctor`
-- `explain`
-- JSON output
+### Future deliverables
+- scene-aware diff
+- timing-aware merge conflict tools
+- asset reference conflict detection
+- prompt/source lineage diff
+- “what changed in the final edit?” reports
 
-### Milestone M4 — SDK baseline
-**Outcome:** Python and TypeScript integrations become first-class.
+---
 
-Includes:
-- typed models
-- parser wrappers
-- fixture-driven tests
-- docs
+## 11.2 Agentic production loops
+USINA can become the contract that multiple specialized agents share.
 
-### Milestone M5 — Authoring DX
-**Outcome:** generating correct files becomes easy in editors and AI workflows.
+### Future loop
+1. research agent gathers sources
+2. writing agent drafts script
+3. media agent suggests assets
+4. compliance agent checks rights and citations
+5. render agent produces execution plan
+6. review agent audits output
+7. optimization agent generates variants
 
-Includes:
-- VS Code extension
+### Why this matters
+This turns USINA into the format for agent-to-agent media collaboration.
+
+---
+
+## 11.3 Registry ecosystem
+A registry should eventually exist for:
+- profiles
+- adapters
+- validators
 - snippets
-- cookbook
-- AI authoring guide
+- templates
+- extension namespaces
+- house styles
+- policy packs
 
-### Milestone M6 — Interop proof
-**Outcome:** at least one adapter turns USINA-YAML into deterministic executable work.
+---
 
-Includes:
+## 11.4 Policy packs and compliance overlays
+Future organizations may want lint overlays for:
+- medical content
+- legal claims
+- advertising disclosures
+- brand safety
+- newsroom/editorial standards
+- internal publishing requirements
+
+---
+
+## 11.5 Reproducible media builds
+The ecosystem should eventually support lockfile-like reproducibility with pinned assets, manifests, seeds, and deterministic execution reports.
+
+---
+
+## 11.6 Provenance graph bridges
+USINA should later be able to export rich provenance information into broader authenticity / credential ecosystems without making that dependency part of the core format.
+
+---
+
+## 11.7 Live preview and collaborative editor
+A future USINA editor could provide:
+- side-by-side YAML + preview
+- lint while typing
+- scene graph navigation
+- source/prompt/rights inspectors
+- collaborative comments
+- review checkpoints
+
+---
+
+## 11.8 Query language and analytics
+A future `usina query` capability could answer questions like:
+- which scenes lack citations?
+- which assets have weak rights metadata?
+- which prompts generated visuals?
+- which exports depend on a given asset?
+- which scenes changed after review round 2?
+
+---
+
+## 12) Priority backlog
+
+## P0
+- canonical naming adoption
+- README normalization
+- governance + RFCs
+- conformance fixtures
+- reference linter
+- CI validation
+- CLI alpha
+
+## P1
+- profiles
+- SDKs
+- VS Code support
 - FFmpeg render-plan adapter
-- bundle/export manifest
-- TTS/subtitle mapping
+- OTIO bridge
+- provenance layer
+- beginner-friendly starter kits
 
-### Milestone M7 — v1.1 proposal package
-**Outcome:** next-version changes are evidence-based and migration-ready.
+## P2
+- Shotstack / JSON2Video / Remotion bridges
+- lockfile and bundle format
+- public docs site
+- badge ecosystem
+- v1.1 line
 
-Includes:
-- RFCs
-- compatibility notes
-- migration guide
-- examples
-
----
-
-## 8) Priority backlog by severity
-
-## P0 — Must happen first
-- Add roadmap.
-- Normalize README to current spec.
-- Add contributing/governance/RFC scaffolding.
-- Create valid/invalid fixture suite.
-- Implement lint engine or at minimum a reference linter.
-- Add CI validation workflow.
-- Publish CLI alpha.
-
-## P1 — High leverage
-- Python and TypeScript SDKs.
-- VS Code support.
-- Multiple real-world examples.
-- Render-plan adapter for FFmpeg.
-- Profile system.
-- Compatibility policy.
-
-## P2 — Strategic expansion
-- NLE interop experiments.
-- Lockfile / signed manifest work.
-- v1.1 advanced feature line.
-- Public docs site and badge ecosystem.
-
-## P3 — Long horizon
-- broader language SDKs
-- enterprise governance overlays
-- signed provenance graph
-- large-scale registry / marketplace / template ecosystem
+## P3
+- semantic diff/merge
+- registry
+- policy packs
+- collaborative editor
+- agentic workflow orchestration
+- provenance graph bridges
 
 ---
 
-## 9) Immediate next 12 execution tickets
+## 13) Immediate next 15 execution tickets
 
-1. Add `ROADMAP.md`.
-2. Rewrite README to the actual v1.0 canonical structure.
-3. Add `CONTRIBUTING.md`.
-4. Add `GOVERNANCE.md`.
-5. Scaffold `RFC/` with template and process.
-6. Add GitHub issue templates and PR template.
-7. Add `docs/glossary.md`.
-8. Create `tests/fixtures/valid/minimal_valid.yml`.
-9. Create `tests/fixtures/invalid/timeline_overlap.yml`.
-10. Add conformance matrix doc.
-11. Add CI workflow for schema validation.
-12. Start reference CLI with `validate` and `lint` commands.
-
----
-
-## 10) Risks and mitigations
-
-### Risk 1 — The standard expands faster than tooling
-**Mitigation:** freeze new core fields until conformance tooling is real.
-
-### Risk 2 — README/spec/schema drift
-**Mitigation:** require all standard PRs to update all three surfaces together.
-
-### Risk 3 — Overfitting to one renderer or one creator workflow
-**Mitigation:** use profiles and namespaced extensions instead of polluting core semantics.
-
-### Risk 4 — Ambiguous interop expectations
-**Mitigation:** document lossless vs lossy mappings explicitly.
-
-### Risk 5 — AI-generated invalid files
-**Mitigation:** publish strict authoring guidelines, snippets, and machine-readable diagnostics.
-
-### Risk 6 — Enterprise/commercial adoption blocked by trust concerns
-**Mitigation:** prioritize checksums, manifests, provenance, and rights reporting.
+1. officialize “USINA Media Script” in README and docs
+2. officialize `.usina.yaml` in spec/docs/examples
+3. add naming glossary section
+4. rewrite README around canonical v1.0 structure
+5. add `CONTRIBUTING.md`
+6. add `GOVERNANCE.md`
+7. scaffold `RFC/`
+8. add issue and PR templates
+9. create conformance matrix
+10. add minimal valid fixture
+11. add invalid overlap fixture
+12. add reference linter error code registry
+13. add CI validation workflow
+14. start `usina` CLI with `validate` and `lint`
+15. draft `docs/competitive-landscape.md`
 
 ---
 
-## 11) Success metrics
-
-### Standard maturity
-- 100% of normative v1.0 lint rules implemented in reference tooling.
-- 100% of normative rules covered by fixtures.
-- zero known contradictions between README, spec, and schema.
-
-### Tooling adoption
-- reference CLI published and used in CI
-- Python and TypeScript packages published
-- editor support available
-
-### Ecosystem growth
-- at least 10 example files across distinct workflows
-- at least 3 profiles documented
-- at least 1 real adapter producing deterministic execution plans
-
-### Quality and trust
-- reproducible validation results
-- explicit rights metadata in all official examples
-- citation-ready examples for factual content
-
----
-
-## 12) Long-term north star
-
-USINA-YAML should eventually support this full loop:
-
-1. A creator or agent writes a conformant YAML file.
-2. The file validates structurally and semantically.
-3. Tooling resolves assets, citations, prompts, and timeline intent.
-4. Adapters generate execution plans for rendering, TTS, captions, thumbnails, metadata, and packaging.
-5. Outputs remain traceable back to sources, prompts, and assets.
-6. The same project can be ported across tools without losing the editorial truth layer.
-
-When that loop is stable, USINA-YAML stops being “a spec repo” and becomes a real production standard.
-
----
-
-## 13) Recommended repository target structure
+## 14) Recommended repository target structure
 
 ```text
 .
@@ -815,8 +701,6 @@ When that loop is stable, USINA-YAML stops being “a spec repo” and becomes a
 ├─ CHANGELOG.md
 ├─ CONTRIBUTING.md
 ├─ GOVERNANCE.md
-├─ LICENSE
-├─ LICENSE_OPTION_CC_BY_NC.md
 ├─ RFC/
 │  ├─ README.md
 │  └─ 0000-template.md
@@ -829,11 +713,13 @@ When that loop is stable, USINA-YAML stops being “a spec repo” and becomes a
 │  └─ localization/
 ├─ docs/
 │  ├─ glossary.md
+│  ├─ naming.md
 │  ├─ conformance-matrix.md
 │  ├─ profiles.md
 │  ├─ compatibility-policy.md
-│  ├─ interop/
-│  └─ cookbook/
+│  ├─ competitive-landscape.md
+│  ├─ future-directions.md
+│  └─ interop/
 ├─ tests/
 │  ├─ fixtures/
 │  │  ├─ valid/
@@ -849,16 +735,56 @@ When that loop is stable, USINA-YAML stops being “a spec repo” and becomes a
 
 ---
 
-## 14) Final recommendation
+## 15) Success metrics
 
-Do not treat the next phase as “write more documentation.”
+### Standard maturity
+- 100% of v1.0 normative lint rules implemented
+- zero contradictions between README, SPEC, schema, and examples
+- profile system documented and usable
 
-Treat it as:
+### Competitive position
+- OTIO bridge exists
+- at least one cloud render export adapter exists
+- at least one code-first framework bridge exists
+- provenance and rights story is visibly stronger than competitors
 
-- **lock the canonical model**
-- **build the conformance surface**
-- **ship the reference tooling**
-- **prove interoperability**
-- **only then expand the core**
+### Adoption
+- 10+ official examples
+- 3+ profiles
+- 2 SDKs
+- 1 editor integration
+- 1 docs site
+- 1 compatibility badge system
 
-That sequencing gives USINA-YAML the best chance of becoming durable, credible, and genuinely useful across creator workflows, AI pipelines, and future production systems.
+### Trust
+- reproducible validation outputs
+- citation-ready examples
+- rights-complete official examples
+- machine-readable audit reports
+
+---
+
+## 16) North star
+
+USINA Media Script should become:
+
+> **the open standard truth layer between creative intent, AI generation, editorial structure, media rights, and execution planning**
+
+When that happens, `.usina.yaml` is not just a YAML file. It becomes the portable contract that lets creators, agents, APIs, editors, and renderers collaborate without losing meaning.
+
+---
+
+## 17) Final recommendation
+
+The winning sequence is:
+
+1. lock naming and canonical identity
+2. lock conformance
+3. ship CLI and fixtures
+4. ship profiles
+5. ship adapters
+6. ship provenance
+7. only then expand the core
+8. build the long-term moat: semantic tools, registry, agent loops, policy packs
+
+That is how USINA Media Script stops being “a promising spec” and becomes a category-defining standard.
