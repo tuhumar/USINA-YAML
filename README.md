@@ -1,144 +1,283 @@
-USINA-YAML 🎬
-The Universal Open Source Standard for Audiovisual Engineering
+# USINA Media Script
 
-USINA-YAML is a declarative specification for the entire video lifecycle: from initial processing and editing to creation and transport. By transforming creative decisions into structured data, Usina eliminates dependency on proprietary formats and allows videos to be "programmed," versioned, and automated.
-🚀 The Vision
+**Repository:** `USINA-YAML`  
+**Canonical schema ID:** `usina.script/v1.0`  
+**Canonical extension:** `.usina.yaml`  
+**Serialization:** YAML 1.2  
+**Status:** v1.0 (stable)
 
-The audiovisual industry is currently held hostage by opaque binary files and closed ecosystems. USINA-YAML was born to be the "Markdown of Video"—a plain-text format, human-readable and machine-processable, capable of describing complex assemblies in a software-agnostic way.
-Why USINA-YAML?
+USINA Media Script is an open, tool-agnostic media scripting standard for audiovisual production.
 
-    True Interoperability: Transport edits between different softwares without data loss (the modern alternative to EDL/XML).
+It is designed to be the **single source of truth** for a production artifact:
+- creative intent
+- timing and structure
+- assets
+- prompts
+- sources and citations
+- rights metadata
+- export targets
+- QA gates
 
-    Native Versioning: Use Git to track every cut, transition, or color grade.
-
-    Scalable Automation: Generate hundreds of video variations (languages, aspect ratios, subtitles) by simply changing variables in the YAML file.
-
-    Agnostic Rendering: Designed to be interpreted by FFMPEG, ML frameworks, or cloud rendering engines.
-
-🛠 How it Works (Syntax Example)
-
-A Usina project defines the logical structure of a video. Below is an example of a "Quick Cut" for Social Media:
-YAML
-
-usina_version: "1.0"
-metadata:
-  title: "Product Launch Teaser"
-  format: "1080x1920" # Vertical 9:16
-  fps: 30
-
-assets:
-  - id: main_clip
-    src: "s3://assets/raw_footage_01.mp4"
-  - id: background_track
-    src: "./audio/lofi_beat.wav"
-
-timeline:
-  - layer: 0 (video)
-    segments:
-      - asset_id: main_clip
-        start_at: 00:00:00
-        duration: 00:00:15
-        crop: "center"
-        effects:
-          - grayscale: 80%
-
-  - layer: 1 (audio)
-    segments:
-      - asset_id: background_track
-        fade_in: 2s
-        volume: -6db
-
-📂 Ecosystem Structure
-
-    /spec: Detailed documentation of every tag and functionality.
-
-    /schema: Official JSON Schema for validation and IDE auto-completion.
-
-    /examples: Templates for YouTube, Cinema, and Dynamic Advertising.
-
-🤝 Contributing
-
-Usina is a community-driven standard. You can help by:
-
-    Suggesting new tags for effects and transitions in the /spec folder.
-
-    Building Parsers for languages like Python, Go, or Rust.
-
-    Developing Plugins for NLEs (Premiere, Resolve) to export/import USINA-YAML.
-
-See CONTRIBUTING.md for more details.
-📜 License
-
-This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).
-
-    Free for Personal Use: Use it for your own projects and learning.
-
-    Non-Commercial: For commercial licensing or enterprise partnerships, please contact the author.
-
-Next Step:
-
-Would you like me to generate a LICENSE file with the full legal text for the "Non-Commercial" terms to ensure your rights are protected in the repository?
-
-**Scope:** Short-form video production scripts (also works for long-form), with explicit **assets**, **sources**, **prompts**, and a deterministic **timeline**.
-
-USINA-YAML is designed as a **single source of truth** for a video episode: creative intent + technical constraints + citations + rights metadata + a time-accurate scene timeline that can drive editors, renderers, and AI-assisted pipelines.
+In practice, a `.usina.yaml` file should be readable by humans, lintable by machines, and portable across automation pipelines, renderers, and future editing adapters.
 
 ---
 
 ## Why this exists
 
-Most “video scripts” are either:
-- human-friendly but machine-hostile (Google Docs), or
-- machine-friendly but human-hostile (NLE project files).
+Most media workflows still split reality into two bad options:
+- human-friendly but machine-hostile documents
+- machine-friendly but human-hostile project files
 
-USINA-YAML sits in the middle: **human readable**, **version controllable**, and **lintable**.
+USINA Media Script aims to sit in the middle:
+- readable like a document
+- structured like a schema
+- versionable like code
+- auditable like a manifest
+- portable like an interchange format
 
-> **Title source:** The canonical video title is read from YAML (`project.title` when present, otherwise `meta.title`). Do not infer titles from filenames or external metadata.
+---
 
+## Canonical identity
 
-1) **Schema validation** (structure/types) using `schema/usina.script.v1.0.schema.json`  
-2) **Lint rules** (math + references), e.g.:
-- timeline ordered
-- no overlap
-- first scene starts at 0
+These values should be treated as the official naming direction of the standard:
+
+- **Marketing / product-facing name:** **USINA Media Script**
+- **Schema ID:** `usina.script/v1.0`
+- **Canonical file extension:** `.usina.yaml`
+- **Repository brand:** `USINA-YAML`
+
+### Example filenames
+- `episode_001.usina.yaml`
+- `air_gen_explainer.usina.yaml`
+- `cobra_veneno_short.usina.yaml`
+
+---
+
+## What makes USINA different
+
+USINA is not only a timeline format.
+
+It is intended to combine:
+- **portable media scripting**
+- **semantic validation and lint**
+- **prompt-aware generation workflows**
+- **source and citation tracking**
+- **rights-aware asset manifests**
+- **renderer-neutral execution planning**
+
+That makes it relevant for:
+- creators
+- editors
+- AI automation builders
+- research media teams
+- agencies and studios
+- future compliance-oriented pipelines
+
+---
+
+## Repository layout
+
+```text
+.
+├─ README.md
+├─ ROADMAP.md
+├─ SPEC.md
+├─ CHANGELOG.md
+├─ schema/
+│  └─ usina.script.v1.0.schema.json
+├─ examples/
+└─ LICENSE
+```
+
+Recommended future additions:
+- `CONTRIBUTING.md`
+- `GOVERNANCE.md`
+- `RFC/`
+- `docs/`
+- `tests/fixtures/`
+- `tools/usina-cli/`
+- `sdk/python/`
+- `sdk/typescript/`
+
+---
+
+## Quick start
+
+### 1) Create a `.usina.yaml` file
+
+Create a file such as:
+
+```text
+examples/my_episode.usina.yaml
+```
+
+At minimum, define:
+- `usina_schema: "usina.script/v1.0"`
+- `meta.duration_s`
+- a `timeline` that starts at `0` and ends at `meta.duration_s`
+- all `assets` declared once and referenced by `asset_id`
+
+### 2) Validate structure
+Use the JSON Schema in:
+
+```text
+schema/usina.script.v1.0.schema.json
+```
+
+### 3) Lint semantics
+USINA expects semantic checks beyond schema validation, such as:
+- timeline ordered by `start_s`
+- no scene overlap
+- first scene starts at `0`
 - last scene ends exactly at `meta.duration_s`
 - every `asset_id` exists
-- shot durations sum (≈) scene duration (within tolerance)
+- every `vo.ref_id` exists
+- every citation points to a valid source
+- shot durations approximately match scene duration
 
-> JSON Schema alone can’t reliably enforce “no overlap” and “timeline ends exactly at duration” — that’s why lint exists.
-
----
-
-## Complete example (includes background audio)
-
-Save this as `examples/air_gen_60s.yml`.
-
-- Includes **background music** (audio bed)
-- Includes **SFX** assets (whooshes/clicks)
-- Demonstrates a scene-level `audio_tracks` array (portable, tool-agnostic)
-- Keeps everything traceable, licensed, and creditable
-
+JSON Schema alone is not enough for these guarantees. That is why the roadmap includes a reference linter and CLI.
 
 ---
 
-## Licensing: “free for research/personal use, NOT for corporate/commercial/profit”
+## Minimal example
 
+```yaml
+usina_schema: "usina.script/v1.0"
+
+meta:
+  title: "Example Episode"
+  episode_id: "example_episode_001"
+  language: "en"
+  duration_s: 10
+  created_at: "2026-03-21T10:00:00-03:00"
+  updated_at: "2026-03-21T10:00:00-03:00"
+  authors: ["Diego Meirinho C. P. Gonçalves"]
+  license: "CC-BY-NC-4.0"
+  version: "1.0.0"
+
+format:
+  aspect_ratio: "9:16"
+  resolution: "1080x1920"
+  fps: 30
+
+style:
+  tone: "clean"
+
+audio: {}
+variables: {}
+prompts: []
+sources: []
+
+assets:
+  - id: intro_card
+    type: "image"
+    uri: "assets/intro_card.png"
+    license: "original"
+    credit: "Diego"
+
+script:
+  vo:
+    blocks:
+      - id: vo_01
+        text: "This is an example."
+        citations: []
+
+timeline:
+  - id: scene_01
+    start_s: 0
+    end_s: 10
+    vo: { ref_id: vo_01 }
+    shots:
+      - type: image
+        duration_s: 10
+        asset_id: intro_card
+
+export: {}
+qa:
+  lint:
+    strict: true
+    tolerance_s: 0.05
+```
 
 ---
 
-## Citation philosophy
+## Design goals
 
-USINA-YAML strongly encourages:
-- conservative claims,
-- explicit `sources[]`,
-- `citations` attached to script blocks containing factual statements.
+USINA Media Script is being built to support:
 
-This makes automated fact-checking and audit trails possible.
+1. **single-source-of-truth media manifests**
+2. **strict schema + lint validation**
+3. **portable execution across multiple backends**
+4. **first-class prompts, sources, and citations**
+5. **rights-aware asset declarations**
+6. **future AI-native and agentic workflows**
+
+---
+
+## What USINA is not
+
+USINA is not trying to be:
+- a full NLE project file replacement on day one
+- a renderer-specific private schema
+- a binary editing container
+- a closed cloud API contract
+
+Instead, it should become the open truth layer between authoring intent and execution targets.
 
 ---
 
-## Contact / Commercial licensing
+## Roadmap direction
 
-If you want commercial rights, enterprise usage, or monetized productions based on the standard, contact the author listed in `meta.authors` (or provide a public email in `meta.contact`).
+The roadmap is focused on turning the standard into a real ecosystem:
+- canonical docs alignment
+- conformance fixtures
+- reference lint rules
+- `usina` CLI
+- SDKs for Python and TypeScript
+- profiles for real workflows
+- OTIO / FFmpeg / Remotion / API bridges
+- provenance and rights tooling
+- long-term semantic diff, registry, and agent workflows
+
+See:
+- `ROADMAP.md`
+- `SPEC.md`
+- `CHANGELOG.md`
 
 ---
+
+## Contributing
+
+Contributions are welcome.
+
+Strong future contributions include:
+- spec clarifications
+- schema improvements
+- fixture files
+- lint rules
+- examples
+- adapters
+- SDK work
+- docs and editor tooling
+
+A full contribution process is planned as part of the roadmap.
+
+---
+
+## Licensing
+
+The repository owner can choose the exact public license strategy, but the intended direction is:
+- open public standard/spec distribution
+- commercial usage handled explicitly where desired
+
+Typical options for spec/document text include Creative Commons licensing, while implementation code may use a software license separately.
+
+---
+
+## North star
+
+USINA Media Script should become:
+
+> the open standard truth layer between creative intent, AI generation, editorial structure, media rights, and execution planning
+
+When that happens, a `.usina.yaml` file stops being just YAML and becomes a portable media contract.
