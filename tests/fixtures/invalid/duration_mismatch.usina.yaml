@@ -1,0 +1,44 @@
+usina_schema: "usina.script/v1.0"
+
+meta:
+  title: "Duration Mismatch"
+  episode_id: "duration_mismatch_001"
+  language: "en"
+  duration_s: 10
+  created_at: "2026-03-22T00:00:00-03:00"
+  updated_at: "2026-03-22T00:00:00-03:00"
+  authors: ["Diego Meirinho C. P. Gonçalves"]
+  license: "CC-BY-NC-4.0"
+  version: "1.0.0"
+
+format: {aspect_ratio: "9:16", resolution: "1080x1920", fps: 30}
+style: {tone: "clean"}
+audio: {}
+variables: {}
+prompts: []
+sources: []
+assets:
+  - id: intro_card
+    type: "image"
+    uri: "assets/intro_card.png"
+    license: "original"
+    credit: "Diego"
+
+script:
+  vo:
+    blocks: []
+
+timeline:
+  - id: scene_01
+    start_s: 0
+    end_s: 10
+    shots:
+      - type: image
+        duration_s: 7
+        asset_id: intro_card
+
+export: {}
+qa:
+  lint:
+    strict: true
+    tolerance_s: 0.05
