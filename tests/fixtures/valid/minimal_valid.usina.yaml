@@ -1,0 +1,80 @@
+usina_schema: "usina.script/v1.0"
+
+meta:
+  title: "Minimal Valid Example"
+  episode_id: "minimal_valid_001"
+  language: "en"
+  duration_s: 10
+  created_at: "2026-03-22T00:00:00-03:00"
+  updated_at: "2026-03-22T00:00:00-03:00"
+  authors: ["Diego Meirinho C. P. Gonçalves"]
+  license: "CC-BY-NC-4.0"
+  version: "1.0.0"
+
+format:
+  aspect_ratio: "9:16"
+  resolution: "1080x1920"
+  fps: 30
+
+style:
+  tone: "clean"
+
+audio:
+  bed:
+    asset_id: bg_music_01
+    gain_db: -18
+
+variables: {}
+
+prompts:
+  - id: writer_prompt_01
+    purpose: "Draft basic VO"
+    kind: "writer"
+    input: "Write a short intro."
+    outputs_expected: ["script.vo.blocks"]
+    constraints: ["Keep it short."]
+
+sources:
+  - id: source_01
+    title: "Example source"
+    type: "web"
+
+assets:
+  - id: intro_card
+    type: "image"
+    uri: "assets/intro_card.png"
+    license: "original"
+    credit: "Diego"
+  - id: bg_music_01
+    type: "audio"
+    uri: "assets/bg_music.wav"
+    license: "royalty_free"
+    credit: "Library"
+
+script:
+  vo:
+    blocks:
+      - id: vo_01
+        text: "This is an example."
+        citations: [source_01]
+
+timeline:
+  - id: scene_01
+    start_s: 0
+    end_s: 10
+    vo: { ref_id: vo_01 }
+    audio_tracks:
+      - asset_id: bg_music_01
+        start_s: 0
+        end_s: 10
+    shots:
+      - type: image
+        duration_s: 10
+        asset_id: intro_card
+
+export: {}
+
+qa:
+  lint:
+    strict: true
+    tolerance_s: 0.05
